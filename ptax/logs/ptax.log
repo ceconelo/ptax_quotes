@@ -6,3 +6,11 @@
 2022-06-03 18:45:34 [format_content_post] INFO: Formatting the data.
 2022-06-03 18:45:34 [tweetAboutIt] INFO: Preparing to post a new tweet.
 2022-06-03 18:45:35 [tweetAboutIt] INFO: Successfully tweeted
+2022-06-03 19:09:04 [<module>] INFO: Initializing...
+2022-06-03 19:09:04 [start] INFO: Accessing the central bank website.
+2022-06-03 19:09:04 [_get_ptax_source] INFO: Quotes found.
+2022-06-03 19:09:04 [_parser_quotes] INFO: Parsing data.
+2022-06-03 19:09:04 [format_content_post] INFO: Formatting the data.
+2022-06-03 19:09:04 [tweetAboutIt] INFO: Preparing to post a new tweet.
+2022-06-03 19:09:06 [tweetAboutIt] INFO: Successfully tweeted
+2022-06-03 19:09:06 [tweetAboutIt] INFO: Tweet ID: 1532846864130883590
