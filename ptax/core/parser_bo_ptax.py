@@ -18,11 +18,11 @@ class ParserBoPtax(RequestPTAX):
             log('console').info('Parsing data.')
             parser_tables = HTMLTableParser()
             parser_tables.feed(source_page)
-            # bo_of_day = parser_tables.tables[0][0][0].split(' ')[-1]  # 'Boletins do dia 02/06/2022'
+            bo_of_day = parser_tables.tables[0][0][0].split(' ')[-1]  # 'Boletins do dia 02/06/2022'
             # header_1 = parser_tables.tables[0][1]  # ['Hora', 'Tipo', 'Taxa 1/', 'Paridade 2/', '']
             # header_2 = parser_tables.tables[0][2]  # ['Compra', 'Venda', 'Compra', 'Venda', 'Gráfico']
             content_row = parser_tables.tables[0][3:-1]  # ['10:00', 'Abertura', '4,7955', '4,7961', '1,0000', '1,0000', '']
-            data = [{'hora': row[0], 'compra': row[2], 'venda': row[3]} for row in content_row]
+            data = [{'data': bo_of_day, 'hora': row[0], 'compra': row[2], 'venda': row[3]} for row in content_row]
             return data
         except BaseException as err:
             log('console').error('There was an error parsing the data')
@@ -53,7 +53,7 @@ class ParserBoPtax(RequestPTAX):
             else:
                 if re.compile(self._msg_not_found).search(msg_error.get()):
                     log('console').info('There are no quotes for that date.')
-                    sys.exit(os.EX_NOTFOUND)
+                    sys.exit(os.EX_UNAVAILABLE)
                 elif re.compile(self._msg_invalid_date).search(msg_error.get()):
                     log('console').error('Enter a valid date.')
                     sys.exit(os.EX_IOERR)

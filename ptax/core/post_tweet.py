@@ -24,11 +24,8 @@ def tweetAboutIt(quotes_ptax):
         if response is not None:
             log('console').info('Successfully tweeted')
             log('root').info(f'Tweet ID: {response.data["id"]}')
-            print(tweettopublish)
-            log('root').info(str(tweettopublish))
     except Unauthorized as err:
         log('console').error('Put your keys in the settings.ini file.')
         log('console').error('Error: {}'.format(err))
     except BaseException as err:
         log('console').error('Error: {}'.format(err))
-

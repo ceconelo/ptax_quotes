@@ -6,8 +6,8 @@ from core.log import log
 
 
 def main():
-    _request_data = datetime.today().strftime('%d/%m/%Y')
-    # _request_data = '04/06/2022' # test
+    # _request_data = datetime.today().strftime('%d/%m/%Y')
+    _request_data = '03/06/2022' # test
 
     pbop = ParserBoPtax(request_data=_request_data)
     quotes_ptax = pbop.start()
