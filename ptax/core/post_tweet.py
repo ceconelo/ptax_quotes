@@ -1,7 +1,7 @@
 from tweepy.errors import Unauthorized
 
-from ptax.core.log import log
-import ptax.api.twitter_api as twitter_api
+from core.log import log
+import api.twitter_api as twitter_api
 
 
 def format_content_post(quotes_ptax):

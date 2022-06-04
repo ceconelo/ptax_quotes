@@ -6,8 +6,8 @@ import re
 
 import os, sys
 
-from ptax.core.log import log
-from ptax.api.request_ptax import RequestPTAX
+from core.log import log
+from api.request_ptax import RequestPTAX
 
 
 class ParserBoPtax(RequestPTAX):
@@ -39,6 +39,9 @@ class ParserBoPtax(RequestPTAX):
 
     def _get_ptax_quote(self, cookies):
         source = self._get_ptax_source(cookies=cookies)
+        if source is None:
+            return None
+
         json_obj = ParserBoPtax._parser_quotes(source)
         return json_obj
 
@@ -52,8 +55,8 @@ class ParserBoPtax(RequestPTAX):
                 return response.text
             else:
                 if re.compile(self._msg_not_found).search(msg_error.get()):
-                    log('console').info('There are no quotes for that date.')
-                    sys.exit(os.EX_UNAVAILABLE)
+                    return None
+                    #sys.exit(os.EX_UNAVAILABLE)
                 elif re.compile(self._msg_invalid_date).search(msg_error.get()):
                     log('console').error('Enter a valid date.')
                     sys.exit(os.EX_IOERR)
