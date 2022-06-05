@@ -5,6 +5,10 @@ import api.twitter_api as twitter_api
 
 
 def format_content_post(quotes_ptax):
+    """
+    We take the dictionary that contains the ptax quotes and transform it into text. This is the text ready
+    for posting on twitter.
+    """
     log('console').info('Formatting the data.')
     txt = 'BRL USD exchange rate\nPTAX: cotação de compra\n'
     for r in quotes_ptax:
@@ -15,6 +19,9 @@ def format_content_post(quotes_ptax):
 
 
 def tweetAboutIt(quotes_ptax):
+    """
+    Method responsible for starting the twitter posting process.
+    """
     tweettopublish = format_content_post(quotes_ptax)
     query_ptax = 'BRL USD exchange rate  -is:retweet'
 

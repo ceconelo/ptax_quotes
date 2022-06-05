@@ -14,6 +14,9 @@ class ParserBoPtax(RequestPTAX):
 
     @classmethod
     def _parser_quotes(cls, source_page):
+        """
+        We format the table found on the bacen site into a dict object and return it to the caller.
+        """
         try:
             log('console').info('Parsing data.')
             parser_tables = HTMLTableParser()
@@ -38,25 +41,36 @@ class ParserBoPtax(RequestPTAX):
         self._div_error = '//div[@class="msgErro"]/text()'
 
     def _get_ptax_quote(self, cookies):
+        """
+        Responsible for calling the method that takes the page containing the ptax quotes and sends it to the formatting.
+        """
         source = self._get_ptax_source(cookies=cookies)
         if source is None:
+            # Quote is not available
             return None
 
-        json_obj = ParserBoPtax._parser_quotes(source)
-        return json_obj
+        quotes = ParserBoPtax._parser_quotes(source)
+        return quotes
 
     def _get_ptax_source(self, cookies):
+        """
+        Request on bacen web site
+        """
         response = self.web.post(url=self._url_ptax_daily, data=self._payload, cookies=cookies)
+        #  Checks if the response was successful
         if response.status_code == HTTPStatus.OK:
             selector = Selector(response.text)
             msg_error = selector.xpath(self._div_error)
+            # Checking to see if the site returned an error message.
             if msg_error.get() is None:
                 log('console').info('Quotes found.')
                 return response.text
             else:
+                # When there are no quotes, the bacen site returns an error message.
+                # Não existe informação para a pesquisa efetuada!
                 if re.compile(self._msg_not_found).search(msg_error.get()):
+                    # Quote is not available
                     return None
-                    #sys.exit(os.EX_UNAVAILABLE)
                 elif re.compile(self._msg_invalid_date).search(msg_error.get()):
                     log('console').error('Enter a valid date.')
                     sys.exit(os.EX_IOERR)
