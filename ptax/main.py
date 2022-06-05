@@ -1,6 +1,7 @@
 from datetime import datetime
 
 import argparse
+import json
 
 from core.parser_bo_ptax import ParserBoPtax
 from core.post_tweet import tweetAboutIt
@@ -40,6 +41,16 @@ def main():
             if quotes_ptax[-1].get('hora') >= get_argument():
                 log('console').info('A new quote has been found.')
                 tweetAboutIt(quotes_ptax=quotes_ptax)
+                # Output json file
+                try:
+                    log('console').info('Saving quotes in output/quotes.json')
+                    to_json = json.dumps(quotes_ptax)
+                    with open ('output/quotes.json', 'w') as f:
+                        f.write(to_json)
+                    log('console').info('Done.')
+                except BaseException as err:
+                    log('console').error(f'An error occurred while trying to save the file in json format. \n {err}')
+
                 break
             else:
                 log('console').info('No new quotes found.')
