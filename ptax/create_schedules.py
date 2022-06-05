@@ -7,7 +7,8 @@ from crontab import CronTab
 GREEN = '\033[92m[+]\033[0m'
 RED = '\033[31m[*]\033[0m'
 
-SCHEDULES_TIME = ['10:00', '11:00', '12:00', '13:00', '14:00']
+# set the schedules
+SCHEDULES_TIME = ['10:00', '11:00', '12:00']
 
 
 def set_schedules():
@@ -16,7 +17,7 @@ def set_schedules():
         hour = int(sched_time.split(':')[0])
         user_cron = CronTab(user=True)
 
-        # command = ~/path to virtual environment ~/path to the module to be executed by crontab
+        # command = ~/path to virtual environment ~/path to the module to be executed by crontab ~/path to log file
         job = user_cron.new(command='/home/drakon/Documents/PROJETOS/ptax/.venv/bin/python3 '
                                     f'/home/drakon/Documents/PROJETOS/ptax/ptax/main.py -t {sched_time} >> '
                                     '/home/drakon/Documents/PROJETOS/ptax/ptax/logs/cron.log  2>&1 ')

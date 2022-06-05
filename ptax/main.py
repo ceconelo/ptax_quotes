@@ -17,8 +17,8 @@ def get_argument():
 
 
 def main():
-    # _request_data = datetime.today().strftime('%d/%m/%Y')
-    _request_data = '04/06/2022'  # test
+    _request_data = datetime.today().strftime('%d/%m/%Y')
+    # _request_data = '04/06/2022'  # test
     pbop = ParserBoPtax(request_data=_request_data)
 
     while True:
