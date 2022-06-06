@@ -26,7 +26,7 @@ def set_schedules():
         # command = ~/path to virtual environment ~/path to the module to be executed by crontab ~/path to log file
         job = user_cron.new(command=f'{venv} {module_main} -t {sched_time} >> {path_log} 2>&1')
 
-        job.setall(f'00 {hour} * * 1-5')
+        job.setall(f'01 {hour} * * 1-5')
         user_cron.write()
     print(f'{GREEN} Scheduling done.')
 

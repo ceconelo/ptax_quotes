@@ -41,7 +41,7 @@ def main():
             # the time passed as argument in the execution of the script started by crontab.
             if quotes_ptax[-1].get('hora') >= get_argument():
                 log('console').info('A new quote has been found.')
-                # tweetAboutIt(quotes_ptax=quotes_ptax)
+                tweetAboutIt(quotes_ptax=quotes_ptax)
                 # Output json file
                 try:
                     log('console').info('Saving quotes in output/quotes.json')
